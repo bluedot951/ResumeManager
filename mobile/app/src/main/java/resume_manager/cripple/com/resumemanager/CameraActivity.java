@@ -26,7 +26,6 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
 import at.markushi.ui.CircleButton;
-import id.zelory.compressor.Compressor;
 
 public class CameraActivity extends AppCompatActivity {
 
@@ -81,6 +80,8 @@ public class CameraActivity extends AppCompatActivity {
                 List<String> customPermission=new ArrayList<>();
                 customPermission.add(Manifest.permission.CAMERA);
                 customPermission.add(Manifest.permission.WRITE_EXTERNAL_STORAGE);
+                customPermission.add(Manifest.permission.INTERNET);
+                customPermission.add(Manifest.permission.READ_EXTERNAL_STORAGE);
                 return customPermission;
             }
         };

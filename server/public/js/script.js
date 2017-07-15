@@ -139,7 +139,7 @@ function sendAcceptEmail(toEmail) {
 	  dataType:"json",
 	  beforeSend: function(xhr) {
 	  	// xhr.setRequestHeader("Content-Type", "application/json");
-	  	xhr.setRequestHeader("Authorization", "BEARER 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");
+	  	xhr.setRequestHeader("Authorization", "BEARER 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");
 	  },
 	  success: function(){
 	    alert("done!");
@@ -180,7 +180,7 @@ function sendRejectEmail(toEmail) {
 	  dataType:"json",
 	  beforeSend: function(xhr) {
 	  	// xhr.setRequestHeader("Content-Type", "application/json");
-	  	xhr.setRequestHeader("Authorization", "BEARER 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");
+	  	xhr.setRequestHeader("Authorization", "BEARER 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");
 	  },
 	  success: function(){
 	    alert("done!");

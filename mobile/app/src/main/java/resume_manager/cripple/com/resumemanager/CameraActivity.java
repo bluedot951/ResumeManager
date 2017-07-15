@@ -2,37 +2,67 @@ package resume_manager.cripple.com.resumemanager;
 
 import android.Manifest;
 import android.app.Activity;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
+import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 
+import com.flurgle.camerakit.CameraListener;
 import com.flurgle.camerakit.CameraView;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.storage.UploadTask;
 import com.karan.churi.PermissionManager.PermissionManager;
 
-import java.io.File;
+import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
+import at.markushi.ui.CircleButton;
+import id.zelory.compressor.Compressor;
+
 public class CameraActivity extends AppCompatActivity {
 
     private PermissionManager permission;
-    private CameraView cameraView;
+    private CameraView mCameraView;
     private StorageReference mStorageRef;
+    private CircleButton mCircleButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_camera);
 
-        cameraView = (CameraView)  findViewById(R.id.camera);
+        mCameraView = (CameraView) findViewById(R.id.camera);
+        mCircleButton = (CircleButton) findViewById(R.id.image);
+
         mStorageRef = FirebaseStorage.getInstance().getReference();
+
+        mCameraView.setCameraListener(new CameraListener() {
+            @Override
+            public void onPictureTaken(byte[] jpeg) {
+                super.onPictureTaken(jpeg);
+                Bitmap image = BitmapFactory.decodeByteArray(jpeg, 0, jpeg.length);
+                ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+                image.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
+                String path = MediaStore.Images.Media.insertImage(CameraActivity.this.getContentResolver(), image, "Title", null);
+                uploadToServer(Uri.parse(path), image.hashCode());
+            }
+        });
+
+        mCircleButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mCameraView.captureImage();
+            }
+        });
 
         permission=new PermissionManager() {
             @Override
@@ -53,6 +83,7 @@ public class CameraActivity extends AppCompatActivity {
                 // Use super.setPermission(); or Don't override this method if not in use
                 List<String> customPermission=new ArrayList<>();
                 customPermission.add(Manifest.permission.CAMERA);
+                customPermission.add(Manifest.permission.WRITE_EXTERNAL_STORAGE);
                 return customPermission;
             }
         };
@@ -65,7 +96,7 @@ public class CameraActivity extends AppCompatActivity {
         ArrayList<String> granted = permission.getStatus().get(0).granted;
 
         if (granted.contains(Manifest.permission.CAMERA)) {
-            cameraView.start();
+            mCameraView.start();
         } else {
             Log.d("Permission-Camera", "Camera Permission Denied");
         }
@@ -74,7 +105,7 @@ public class CameraActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         if (permission.getStatus().get(0).granted.contains(Manifest.permission.CAMERA)) {
-            cameraView.start();
+            mCameraView.start();
         }
         super.onResume();
     }
@@ -82,7 +113,7 @@ public class CameraActivity extends AppCompatActivity {
     @Override
     protected void onPause() {
         super.onPause();
-        cameraView.stop();
+        mCameraView.stop();
     }
 
     private void uploadToServer(Uri imageUri, int imageHash) {

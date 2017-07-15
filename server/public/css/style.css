@@ -1,0 +1,41 @@
+#resume {
+  margin: auto;
+  padding: 0;
+  display: block;
+  margin: 0 auto;
+  height: 100vh;
+  z-index: -1;
+}
+
+#check {
+	z-index: 4;
+	position: absolute;
+	right: 2px;
+	top: 10px;
+	width: 100px;
+	display: none;
+}
+
+#cross {
+	z-index: 4;
+	position: absolute;
+	left: 2px;
+	top: 10px;
+	width: 100px;
+	display: none;
+}
+
+#accepted {
+	position: absolute;
+	right: 15px;
+	bottom: 2px;
+	width: 200px;
+	font-size: 20px;
+	display: none;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  background-color: #708090;
+}

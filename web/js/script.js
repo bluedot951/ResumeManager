@@ -10,9 +10,21 @@ function checkKey(e) {
 	e = e || window.event;
 
 	if (e.keyCode == '37') {
+
+		getLeft(allData[pos]["key"], function(val) {
+			var newVal = val + 1;
+			if(newVal == 2) {
+				console.log("sending reject email!");
+				sendRejectEmail("gore.shantanu@gmail.com");
+			}
+			else {
+				console.log("newVal:" + newVal);
+			}
+		});
+
        $("#resume").fadeOut(500, function() {
-				addLeft(allData[pos]["key"]);
-       	setNextImage();
+			addLeft(allData[pos]["key"]);
+       		setNextImage();
        });
 
        $("#cross").fadeIn(500, function() {
@@ -26,8 +38,8 @@ function checkKey(e) {
        // document.getElementById("resume").src = "shantanu.jpg";
        // fade();
        $("#resume").fadeOut(500, function() {
-				addRight(allData[pos]["key"]);
-       	setNextImage()
+			addRight(allData[pos]["key"]);
+       		setNextImage()
        });
 
        $("#check").fadeIn(500, function() {

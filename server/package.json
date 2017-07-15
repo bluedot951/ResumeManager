@@ -10,8 +10,6 @@
   "license": "ISC",
   "dependencies": {
     "express": "^4.15.3",
-    "path": "^0.12.7",
-    "sendgrid": "^5.1.2",
-    "sendgrid-rest": "^2.4.0"
+    "path": "^0.12.7"
   }
 }

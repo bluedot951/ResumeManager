@@ -4,7 +4,7 @@ android {
     compileSdkVersion 25
     buildToolsVersion "25.0.0"
     defaultConfig {
-        applicationId "resume_manager.cripple.com.resumemanager"
+        applicationId "com.cripple.resume_manager"
         minSdkVersion 24
         targetSdkVersion 25
         versionCode 1
@@ -29,3 +29,5 @@ dependencies {
     testCompile 'junit:junit:4.12'
     compile 'id.zelory:compressor:2.1.0'
 }
+
+apply plugin: 'com.google.gms.google-services'

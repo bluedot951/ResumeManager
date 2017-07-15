@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "321650084410",
+    "firebase_url": "https://resumemanager-5c41e.firebaseio.com",
+    "project_id": "resumemanager-5c41e",
+    "storage_bucket": "resumemanager-5c41e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:321650084410:android:2c09779913887083",
+        "android_client_info": {
+          "package_name": "com.cripple.resume_manager"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "321650084410-v2hdpd3r3kcui7qm9u121l1taoa1d77s.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAPTrGXuPWxYwNlVr-iRE-5WNKtkx7_egY"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

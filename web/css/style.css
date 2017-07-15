@@ -1,0 +1,12 @@
+img {
+  margin: auto;
+  padding: 0;
+  display: block;
+  margin: 0 auto;
+  height: 100vh;
+}
+html, body {
+  margin: 0;
+  padding: 0;
+  background-color: #708090;
+}

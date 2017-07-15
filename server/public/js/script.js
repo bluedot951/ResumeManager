@@ -23,7 +23,7 @@ function checkKey(e) {
 		});
 
        $("#resume").fadeOut(500, function() {
-			addLeft(allData[pos]["key"]);
+				 	addLeft(allData[pos]["key"]);
        		setNextImage();
        });
 
@@ -38,8 +38,10 @@ function checkKey(e) {
        // document.getElementById("resume").src = "shantanu.jpg";
        // fade();
        $("#resume").fadeOut(500, function() {
-			addRight(allData[pos]["key"]);
-       		setNextImage()
+					if (pos >= 0) {
+					 addRight(allData[pos]["key"]);
+				}
+				setNextImage()
        });
 
        $("#check").fadeIn(500, function() {
@@ -52,7 +54,7 @@ function checkKey(e) {
 }
 
 function fetchAllKeys() {
-	var ref = firebase.database().ref();
+	var ref = firebase.database().ref("users");
 	ref.orderByChild("timestamp").once('value').then(function(snapshot) {
 		snapshot.forEach(function(childSnap) {
 			v = childSnap.val();
@@ -61,8 +63,7 @@ function fetchAllKeys() {
 		});
 	});
 
-	pos = 0;
-	document.getElementById("resume").src = allData[pos]["value"]["imageName"];
+	pos = -1;
 
 
 }

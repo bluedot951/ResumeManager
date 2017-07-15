@@ -1,12 +1,12 @@
 var db = firebase.database()
 function addLeft(user) {
-  db.ref(user).child("leftSwipe").transaction(function(currSwipe) {
+  db.ref("users/" + user + "/leftSwipe").transaction(function(currSwipe) {
     console.log("Incrementing left")
     return ++currSwipe;
   })
 }
 function addRight(user) {
-  db.ref(user).child("rightSwipe").transaction(function(currSwipe) {
+  db.ref("users/" + user + "/rightSwipe").transaction(function(currSwipe) {
     console.log("Incrementing rightSwipe")
     return ++currSwipe;
   })

@@ -2,27 +2,37 @@ package resume_manager.cripple.com.resumemanager;
 
 import android.Manifest;
 import android.app.Activity;
+import android.net.Uri;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 
-import com.cripple.resume_manager.R;
 import com.google.android.cameraview.CameraView;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.storage.UploadTask;
 import com.karan.churi.PermissionManager.PermissionManager;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 public class CameraActivity extends AppCompatActivity {
 
     private CameraView mCameraView;
     private PermissionManager permission;
     private static boolean rightsGiven;
+    private StorageReference mStorageRef;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_camera);
+
+        mStorageRef = FirebaseStorage.getInstance().getReference();
         mCameraView = (CameraView) findViewById(R.id.camera);
 
         permission=new PermissionManager() {
@@ -75,5 +85,27 @@ public class CameraActivity extends AppCompatActivity {
     protected void onPause() {
         mCameraView.stop();
         super.onPause();
+    }
+
+    private void uploadToServer(Uri imageUri, int imageHash) {
+//        Uri imageUri = Uri.fromFile(new File("rahul's_path"));
+        // Store image as hash
+        StorageReference resumesRef = mStorageRef.child("resumes/" + imageHash + ".jpg");
+
+        resumesRef.putFile(imageUri)
+                .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                    @Override
+                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                        // Get a URL to the uploaded content
+                        Uri downloadUrl = taskSnapshot.getDownloadUrl();
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception exception) {
+                        // Handle unsuccessful uploads
+                        // ...
+                    }
+                });
     }
 }

@@ -119,7 +119,7 @@ public class CameraActivity extends AppCompatActivity {
     private void uploadToServer(Uri imageUri, int imageHash) {
 //        Uri imageUri = Uri.fromFile(new File("rahul's_path"));
         // Store image as hash
-        StorageReference resumesRef = mStorageRef.child("resumes/" + imageHash + ".jpg");
+        StorageReference resumesRef = mStorageRef.child(imageHash + ".jpg");
 
         resumesRef.putFile(imageUri)
                 .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {

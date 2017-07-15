@@ -143,7 +143,7 @@ public class CameraActivity extends AppCompatActivity {
 
                         profilesRef.child("users").push().setValue(newUser);
 
-                        mProgress.cancel();
+                        mProgress.hide();
 
                         new SweetAlertDialog(CameraActivity.this, SweetAlertDialog.SUCCESS_TYPE)
                                 .setTitleText("Upload Successful!")

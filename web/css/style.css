@@ -4,6 +4,7 @@ img {
   display: block;
   margin: 0 auto;
   height: 100vh;
+  transition: width 2s;
 }
 html, body {
   margin: 0;

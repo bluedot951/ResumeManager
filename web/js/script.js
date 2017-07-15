@@ -9,6 +9,7 @@ function checkKey(e) {
 
 	if (e.keyCode == '37') {
        $("#resume").fadeOut(500, function() {
+				addLeft(allData[pos]["key"]);
        	setNextImage();
        });
 
@@ -21,6 +22,7 @@ function checkKey(e) {
        // document.getElementById("resume").src = "shantanu.jpg";
        // fade();
        $("#resume").fadeOut(500, function() {
+				addRight(allData[pos]["key"]);
        	setNextImage()
        });
 

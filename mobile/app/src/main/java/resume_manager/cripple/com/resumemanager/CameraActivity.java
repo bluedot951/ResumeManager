@@ -50,10 +50,7 @@ public class CameraActivity extends AppCompatActivity {
             public void onPictureTaken(byte[] jpeg) {
                 super.onPictureTaken(jpeg);
                 Bitmap image = BitmapFactory.decodeByteArray(jpeg, 0, jpeg.length);
-                ByteArrayOutputStream bytes = new ByteArrayOutputStream();
-                image.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
-                String path = MediaStore.Images.Media.insertImage(CameraActivity.this.getContentResolver(), image, "Title", null);
-                uploadToServer(Uri.parse(path), image.hashCode());
+                uploadToServer(image);
             }
         });
 
@@ -116,25 +113,14 @@ public class CameraActivity extends AppCompatActivity {
         mCameraView.stop();
     }
 
-    private void uploadToServer(Uri imageUri, int imageHash) {
+    private void uploadToServer(Bitmap image) {
 //        Uri imageUri = Uri.fromFile(new File("rahul's_path"));
         // Store image as hash
-        StorageReference resumesRef = mStorageRef.child(imageHash + ".jpg");
+        StorageReference resumesRef = mStorageRef.child(image.hashCode() + ".jpeg");
 
-        resumesRef.putFile(imageUri)
-                .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                    @Override
-                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                        // Get a URL to the uploaded content
-                        Uri downloadUrl = taskSnapshot.getDownloadUrl();
-                    }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception exception) {
-                        // Handle unsuccessful uploads
-                        // ...
-                    }
-                });
+        ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+        image.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
+
+        resumesRef.putBytes(bytes.toByteArray());
     }
 }

@@ -15,7 +15,7 @@ function checkKey(e) {
 			var newVal = val + 1;
 			if(newVal == 2) {
 				console.log("sending reject email!");
-				sendRejectEmail("gore.shantanu@gmail.com");
+				sendRejectEmail("sg937@cornell.edu");
 			}
 			else {
 				console.log("newVal:" + newVal);
@@ -31,7 +31,7 @@ function checkKey(e) {
        		$("#cross").fadeOut(500, null);
        });
 
-       // sendRejectEmail("gore.shantanu@gmail.com");
+       // sendRejectEmail("sg937@cornell.edu");
 
 	}
 	else if (e.keyCode == '39') {
@@ -46,7 +46,7 @@ function checkKey(e) {
        		$("#check").fadeOut(500, null);
        });
 
-       sendAcceptEmail("gore.shantanu@gmail.com");
+       sendAcceptEmail("sg937@cornell.edu");
    }
 
 }
@@ -62,6 +62,9 @@ function fetchAllKeys() {
 	});
 
 	pos = 0;
+	document.getElementById("resume").src = allData[pos]["value"]["imageName"];
+
+
 }
 
 
@@ -89,11 +92,11 @@ function sendAcceptEmail(toEmail) {
 	          "email": toEmail
 	        }
 	      ],
-	      "subject": "Hello, World!"
+	      "subject": "Good News!"
 	    }
 	  ],
 	  "from": {
-	    "email": "sg937@cornell.edu"
+	    "email": "resumemanager.linkedin@gmail.com"
 	  },
 	  "content": [
 	    {
@@ -130,11 +133,11 @@ function sendRejectEmail(toEmail) {
 	          "email": toEmail
 	        }
 	      ],
-	      "subject": "Hello, World!"
+	      "subject": "Your Application Status"
 	    }
 	  ],
 	  "from": {
-	    "email": "sg937@cornell.edu"
+	    "email": "resumemanager.linkedin@gmail.com"
 	  },
 	  "content": [
 	    {

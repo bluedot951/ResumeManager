@@ -7,7 +7,7 @@ function addLeft(user) {
 }
 function addRight(user) {
   db.ref(user).child("rightSwipe").transaction(function(currSwipe) {
-    console.log("Incrementing left")
+    console.log("Incrementing rightSwipe")
     return ++currSwipe;
   })
 }

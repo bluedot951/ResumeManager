@@ -27,6 +27,7 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
 import at.markushi.ui.CircleButton;
+import cn.pedant.SweetAlert.SweetAlertDialog;
 
 public class CameraActivity extends AppCompatActivity {
 
@@ -36,6 +37,7 @@ public class CameraActivity extends AppCompatActivity {
     private CircleButton mCircleButton;
     private FirebaseDatabase database;
     private DatabaseReference profilesRef;
+    private SweetAlertDialog mProgress;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +51,7 @@ public class CameraActivity extends AppCompatActivity {
         database = FirebaseDatabase.getInstance();
 
         profilesRef = database.getReference();
+        mProgress = new SweetAlertDialog(this, SweetAlertDialog.PROGRESS_TYPE);
 
         mCameraView.setCameraListener(new CameraListener() {
             @Override
@@ -63,6 +66,7 @@ public class CameraActivity extends AppCompatActivity {
         mCircleButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                mProgress.setTitleText("Uploading Image!").setContentText("Sending resume to hiring managers!").show();
                 mCameraView.captureImage();
             }
         });
@@ -140,6 +144,13 @@ public class CameraActivity extends AppCompatActivity {
                         User newUser = new User(username, email, unixTime, downloadUrl.toString());
 
                         profilesRef.child("users").push().setValue(newUser);
+
+                        mProgress.cancel();
+
+                        new SweetAlertDialog(CameraActivity.this, SweetAlertDialog.SUCCESS_TYPE)
+                                .setTitleText("Upload Successful!")
+                                .setContentText("Resume successfully sent to hiring managers!")
+                                .show();
                     }
                 });
     }

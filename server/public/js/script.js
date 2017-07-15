@@ -17,7 +17,7 @@ function checkKey(e) {
 				console.log("newVal: " + newVal);
 				if(newVal == 2) {
 					console.log("done with lefts!");
-					sendRejectEmail("sjinesh3@gatech.edu");
+					sendRejectEmail("sujeethjinesh@gmail.com");
 					disable(allData[pos]["key"]);
 					$("#rejected").fadeIn(1500, function() {
 			       		$("#rejected").fadeOut(1500, null);

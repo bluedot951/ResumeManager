@@ -9,7 +9,7 @@ function checkKey(e) {
 
 	if (e.keyCode == '37') {
        $("#resume").fadeOut(500, function() {
-       		setNextImage();
+       	setNextImage();
        });
 
        $("#cross").fadeIn(500, function() {
@@ -21,7 +21,7 @@ function checkKey(e) {
        // document.getElementById("resume").src = "shantanu.jpg";
        // fade();
        $("#resume").fadeOut(500, function() {
-       	setNextImage();
+       	setNextImage()
        });
 
        $("#check").fadeIn(500, function() {
@@ -49,7 +49,9 @@ function setNextImage() {
 	else {
 		document.getElementById("resume").src = allData[++pos]["value"]["imageName"];
 	}
-	$("#resume").fadeIn(500, null);
+	$("#resume").one("load", function() {
+		$("#resume").fadeIn(500, null);
+	})
 }
 // function fade() {
 // 	$("#resume").fadeOut(1000, function() {

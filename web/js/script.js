@@ -6,8 +6,12 @@ function checkKey(e) {
 
 	if (e.keyCode == '37') {
        $("#resume").fadeOut(500, function() {
-       	document.getElementById("resume").src = "sandeep.jpg";
+       	document.getElementById("resume").src = getNextImage();
        	$("#resume").fadeIn(500, null);
+       });
+
+       $("#cross").fadeIn(500, function() {
+       		$("#cross").fadeOut(500, null);
        });
 
 	}
@@ -15,10 +19,22 @@ function checkKey(e) {
        // document.getElementById("resume").src = "shantanu.jpg";
        // fade();
        $("#resume").fadeOut(500, function() {
-       	document.getElementById("resume").src = "shantanu.jpg";
+       	document.getElementById("resume").src = getNextImage();
        	$("#resume").fadeIn(500, null);
        });
+
+       $("#check").fadeIn(500, function() {
+       		$("#check").fadeOut(500, null);
+       });
    }
+
+}
+
+function getNextImage() {
+	if(document.getElementById("resume").src === "http://localhost:8000/web/shantanu.jpg") return "http://localhost:8000/web/sandeep.jpg";
+	if(document.getElementById("resume").src === "http://localhost:8000/web/sandeep.jpg") return "http://localhost:8000/web/shantanu.jpg";
+
+	return "hello.jpg";
 
 }
 

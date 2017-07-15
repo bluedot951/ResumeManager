@@ -18,8 +18,8 @@ function checkKey(e) {
        $("#cross").fadeIn(500, function() {
        		$("#cross").fadeOut(500, null);
        });
-
-       sendRejectEmail("gore.shantanu@gmail.com");
+			 var email = allData[pos]["value"]["email"]
+       sendRejectEmail(email);
 
 	}
 	else if (e.keyCode == '39') {
@@ -33,8 +33,8 @@ function checkKey(e) {
        $("#check").fadeIn(500, function() {
        		$("#check").fadeOut(500, null);
        });
-
-       sendAcceptEmail("gore.shantanu@gmail.com");
+			 var email = allData[pos]["value"]["email"]
+       sendAcceptEmail(email);
    }
 
 }
@@ -90,15 +90,16 @@ function sendAcceptEmail(toEmail) {
 
 	$.ajax({
 	  url:url,
-	  type:"POST",
+	  method:"POST",
 	  data:JSON.stringify(data),
 	  contentType:"application/json; charset=utf-8",
+		crossDomain: true,
 	  dataType:"json",
 	  beforeSend: function(xhr) {
 	  	// xhr.setRequestHeader("Content-Type", "application/json");
-	  	xhr.setRequestHeader("Authorization", "BEARER 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");
+	  	xhr.setRequestHeader("Authorization", "BEARER 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");
 	  },
-	  success: function(){
+	  success: function(result){
 	    alert("done!");
 	  }
 	})
@@ -133,11 +134,12 @@ function sendRejectEmail(toEmail) {
 	  url:url,
 	  type:"POST",
 	  data:JSON.stringify(data),
+		crossDomain: true,
 	  contentType:"application/json; charset=utf-8",
 	  dataType:"json",
 	  beforeSend: function(xhr) {
 	  	// xhr.setRequestHeader("Content-Type", "application/json");
-	  	xhr.setRequestHeader("Authorization", "BEARER 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");
+	  	xhr.setRequestHeader("Authorization", "BEARER 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");
 	  },
 	  success: function(){
 	    alert("done!");

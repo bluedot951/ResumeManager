@@ -14,6 +14,7 @@ public class User {
     public int rightSwipe;
     public long unixTime;
     public String imageName;
+    public boolean display;
 
     public User() {
     }
@@ -25,5 +26,6 @@ public class User {
         this.rightSwipe = 0;
         this.unixTime = unixTime;
         this.imageName = imageName;
+        this.display = true;
     }
 }

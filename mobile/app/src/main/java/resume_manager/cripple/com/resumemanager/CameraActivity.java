@@ -5,7 +5,6 @@ import android.app.Activity;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
-import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -16,6 +15,8 @@ import com.flurgle.camerakit.CameraListener;
 import com.flurgle.camerakit.CameraView;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.UploadTask;
 import com.karan.churi.PermissionManager.PermissionManager;
 
@@ -33,6 +34,8 @@ public class CameraActivity extends AppCompatActivity {
     private CameraView mCameraView;
     private StorageReference mStorageRef;
     private CircleButton mCircleButton;
+    private FirebaseDatabase database;
+    private DatabaseReference profilesRef;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,12 +46,16 @@ public class CameraActivity extends AppCompatActivity {
         mCircleButton = (CircleButton) findViewById(R.id.image);
 
         mStorageRef = FirebaseStorage.getInstance().getReference();
+        database = FirebaseDatabase.getInstance();
+
+        profilesRef = database.getReference();
 
         mCameraView.setCameraListener(new CameraListener() {
             @Override
             public void onPictureTaken(byte[] jpeg) {
                 super.onPictureTaken(jpeg);
                 Bitmap image = BitmapFactory.decodeByteArray(jpeg, 0, jpeg.length);
+
                 uploadToServer(image);
             }
         });
@@ -122,6 +129,18 @@ public class CameraActivity extends AppCompatActivity {
         ByteArrayOutputStream bytes = new ByteArrayOutputStream();
         image.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
 
-        resumesRef.putBytes(bytes.toByteArray());
+        resumesRef.putBytes(bytes.toByteArray())
+                .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                    @Override
+                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                        final Uri downloadUrl = taskSnapshot.getDownloadUrl();
+                        String username = "Sujeeth Jinesh";
+                        String email = "sujeethjinesh@gmail.com";
+                        long unixTime = System.currentTimeMillis() / 1000L;
+                        User newUser = new User(username, email, unixTime, downloadUrl.toString());
+
+                        profilesRef.child("users").push().setValue(newUser);
+                    }
+                });
     }
 }

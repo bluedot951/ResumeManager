@@ -11,43 +11,68 @@ function checkKey(e) {
 
 	if (e.keyCode == '37') {
 
-		getLeft(allData[pos]["key"], function(val) {
-			var newVal = val + 1;
-			if(newVal == 2) {
-				sendRejectEmail("sjinesh3@gatech.edu");
-			}
-			else {
-				// console.log("newVal:" + newVal);
-			}
-		});
+		if(pos >= 0) {
+			getLeft(allData[pos]["key"], function(val) {
+				var newVal = val + 1;
+				console.log("newVal: " + newVal);
+				if(newVal == 2) {
+					console.log("done with lefts!");
+					sendRejectEmail("sjinesh3@gatech.edu");
+					disable(allData[pos]["key"]);
+					$("#rejected").fadeIn(1500, function() {
+			       		$("#rejected").fadeOut(1500, null);
+			       	});
+				}
+			});
+		}
 
        $("#resume").fadeOut(500, function() {
-				 	addLeft(allData[pos]["key"]);
+       		if(pos >= 0) {
+				addLeft(allData[pos]["key"]);
+			}
        		setNextImage();
        });
 
-       $("#cross").fadeIn(500, function() {
-       		$("#cross").fadeOut(500, null);
-       });
+       if (pos >= 0) {
+	       $("#cross").fadeIn(500, function() {
+	       		$("#cross").fadeOut(500, null);
+	       });
+	   }
 
        // sendRejectEmail("sg937@cornell.edu");
 
 	}
 	else if (e.keyCode == '39') {
-       // document.getElementById("resume").src = "shantanu.jpg";
-       // fade();
+
+		if(pos >= 0) {
+			getRight(allData[pos]["key"], function(val) {
+				var newVal = val + 1;
+				console.log("newVal: " + newVal);
+
+				if(newVal == 2) {
+					console.log("done with rights!");
+					sendAcceptEmail("sg937@cornell.edu");
+					disable(allData[pos]["key"]);
+					$("#accepted").fadeIn(1500, function() {
+			       		$("#accepted").fadeOut(1500, null);
+			       	});
+				}
+			});
+		}
+
        $("#resume").fadeOut(500, function() {
-					if (pos >= 0) {
+				if (pos >= 0) {
 					 addRight(allData[pos]["key"]);
 				}
 				setNextImage()
        });
 
-       $("#check").fadeIn(500, function() {
-       		$("#check").fadeOut(500, null);
-       });
+       if(pos >= 0) {
+	       $("#check").fadeIn(500, function() {
+	       		$("#check").fadeOut(500, null);
+	       });
+	   }
 
-       sendAcceptEmail("sg937@cornell.edu");
    }
 
 }

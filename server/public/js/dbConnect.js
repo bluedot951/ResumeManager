@@ -13,7 +13,20 @@ function addRight(user) {
 }
 
 function getLeft(user, cb) {
-	db.ref("Shantanu/leftSwipe").once('value', function(snap) {
+	db.ref("users/" + user + "/leftSwipe").once('value', function(snap) {
 		cb(snap.val());
 	});
+}
+
+function getRight(user, cb) {
+  db.ref("users/" + user + "/rightSwipe").once('value', function(snap) {
+    cb(snap.val());
+  });
+}
+
+
+function disable(user) {
+  db.ref("users/" + user + "/display").transaction(function(curDisplay) {
+    return false;
+  })
 }

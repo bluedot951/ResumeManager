@@ -5,3 +5,9 @@ function addLeft(user) {
     return ++currSwipe;
   })
 }
+function addRight(user) {
+  db.ref(user).child("rightSwipe").transaction(function(currSwipe) {
+    console.log("Incremeneting left")
+    return ++currSwipe;
+  })
+}

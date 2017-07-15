@@ -19,6 +19,8 @@ function checkKey(e) {
        		$("#cross").fadeOut(500, null);
        });
 
+       sendRejectEmail("gore.shantanu@gmail.com");
+
 	}
 	else if (e.keyCode == '39') {
        // document.getElementById("resume").src = "shantanu.jpg";
@@ -31,6 +33,8 @@ function checkKey(e) {
        $("#check").fadeIn(500, function() {
        		$("#check").fadeOut(500, null);
        });
+
+       sendAcceptEmail("gore.shantanu@gmail.com");
    }
 
 }
@@ -58,9 +62,85 @@ function setNextImage() {
 		$("#resume").fadeIn(500, null);
 	})
 }
-// function fade() {
-// 	$("#resume").fadeOut(1000, function() {
-//         document.getElementById("resume").src = "shantanu.jpg";
-//     }).fadeIn(1000);
-//     return false;
-// }
+
+function sendAcceptEmail(toEmail) {
+	var url = "https://api.sendgrid.com/v3/mail/send";
+
+	data = {
+	  "personalizations": [
+	    {
+	      "to": [
+	        {
+	          "email": toEmail
+	        }
+	      ],
+	      "subject": "Hello, World!"
+	    }
+	  ],
+	  "from": {
+	    "email": "sg937@cornell.edu"
+	  },
+	  "content": [
+	    {
+	      "type": "text/plain",
+	      "value": "Congratulations! We would like to schedule an interview with you!"
+	    }
+	  ]
+	};
+
+	$.ajax({
+	  url:url,
+	  type:"POST",
+	  data:JSON.stringify(data),
+	  contentType:"application/json; charset=utf-8",
+	  dataType:"json",
+	  beforeSend: function(xhr) {
+	  	// xhr.setRequestHeader("Content-Type", "application/json");
+	  	xhr.setRequestHeader("Authorization", "BEARER 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");
+	  },
+	  success: function(){
+	    alert("done!");
+	  }
+	})
+}
+
+function sendRejectEmail(toEmail) {
+	var url = "https://api.sendgrid.com/v3/mail/send";
+
+	data = {
+	  "personalizations": [
+	    {
+	      "to": [
+	        {
+	          "email": toEmail
+	        }
+	      ],
+	      "subject": "Hello, World!"
+	    }
+	  ],
+	  "from": {
+	    "email": "sg937@cornell.edu"
+	  },
+	  "content": [
+	    {
+	      "type": "text/plain",
+	      "value": "Sorry, we received many highly qualified applicants this year, and could not find a position for you."
+	    }
+	  ]
+	};
+
+	$.ajax({
+	  url:url,
+	  type:"POST",
+	  data:JSON.stringify(data),
+	  contentType:"application/json; charset=utf-8",
+	  dataType:"json",
+	  beforeSend: function(xhr) {
+	  	// xhr.setRequestHeader("Content-Type", "application/json");
+	  	xhr.setRequestHeader("Authorization", "BEARER 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");
+	  },
+	  success: function(){
+	    alert("done!");
+	  }
+	})
+}

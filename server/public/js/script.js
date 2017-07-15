@@ -30,8 +30,8 @@ function checkKey(e) {
        $("#cross").fadeIn(500, function() {
        		$("#cross").fadeOut(500, null);
        });
-			 var email = allData[pos]["value"]["email"]
-       sendRejectEmail(email);
+
+       // sendRejectEmail("gore.shantanu@gmail.com");
 
 	}
 	else if (e.keyCode == '39') {
@@ -45,8 +45,8 @@ function checkKey(e) {
        $("#check").fadeIn(500, function() {
        		$("#check").fadeOut(500, null);
        });
-			 var email = allData[pos]["value"]["email"]
-       sendAcceptEmail(email);
+
+       sendAcceptEmail("gore.shantanu@gmail.com");
    }
 
 }
@@ -55,9 +55,12 @@ function fetchAllKeys() {
 	var ref = firebase.database().ref();
 	ref.orderByChild("timestamp").once('value').then(function(snapshot) {
 		snapshot.forEach(function(childSnap) {
+			v = childSnap.val();
+			if(v.display)
 				allData.push({"key": childSnap.key, "value": childSnap.val()})
-		})
+		});
 	});
+
 	pos = 0;
 }
 
@@ -102,16 +105,15 @@ function sendAcceptEmail(toEmail) {
 
 	$.ajax({
 	  url:url,
-	  method:"POST",
+	  type:"POST",
 	  data:JSON.stringify(data),
 	  contentType:"application/json; charset=utf-8",
-		crossDomain: true,
 	  dataType:"json",
 	  beforeSend: function(xhr) {
 	  	// xhr.setRequestHeader("Content-Type", "application/json");
-	  	xhr.setRequestHeader("Authorization", "BEARER SG.NPvEqNZsQJiF3wfNt1XZ3w.wHZ83YN0iZUVUdHq22wdJOYmN6NjE6M6N-sjUn0ytt0");
+	  	xhr.setRequestHeader("Authorization", "BEARER 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");
 	  },
-	  success: function(result){
+	  success: function(){
 	    alert("done!");
 	  }
 	})
@@ -146,12 +148,11 @@ function sendRejectEmail(toEmail) {
 	  url:url,
 	  type:"POST",
 	  data:JSON.stringify(data),
-		crossDomain: true,
 	  contentType:"application/json; charset=utf-8",
 	  dataType:"json",
 	  beforeSend: function(xhr) {
 	  	// xhr.setRequestHeader("Content-Type", "application/json");
-	  	xhr.setRequestHeader("Authorization", "BEARER SG.NPvEqNZsQJiF3wfNt1XZ3w.wHZ83YN0iZUVUdHq22wdJOYmN6NjE6M6N-sjUn0ytt0");
+	  	xhr.setRequestHeader("Authorization", "BEARER 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");
 	  },
 	  success: function(){
 	    alert("done!");

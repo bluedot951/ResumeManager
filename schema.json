@@ -1,0 +1,6 @@
+{
+    leftSwipe: int,
+    rightSwipe: int,
+    imageName: String,
+    timestamp: Unix Time Stamp
+}

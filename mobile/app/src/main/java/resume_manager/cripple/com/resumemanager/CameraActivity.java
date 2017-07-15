@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 
+import com.cripple.resume_manager.R;
 import com.google.android.cameraview.CameraView;
 import com.karan.churi.PermissionManager.PermissionManager;
 

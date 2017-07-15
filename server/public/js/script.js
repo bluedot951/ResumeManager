@@ -64,7 +64,7 @@ function setNextImage() {
 }
 
 function sendAcceptEmail(toEmail) {
-	var url = "localhost:3000/sendMailAccept?email=" + toEmail
+	var url = "http://localhost:3000/sendMailAccept?email=" + toEmail
 	$.ajax({
 	  url:url,
 	  method:"GET",
@@ -75,7 +75,7 @@ function sendAcceptEmail(toEmail) {
 }
 
 function sendRejectEmail(toEmail) {
-	var url = "localhost:3000/sendMailReject?email=" + toEmail
+	var url = "http://localhost:3000/sendMailReject?email=" + toEmail
 	$.ajax({
 	  url:url,
 	  type:"GET",

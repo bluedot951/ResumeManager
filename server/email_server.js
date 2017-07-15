@@ -2,6 +2,10 @@ var express = require('express');
 var app = express();
 var mail = require('sendgrid').mail;
 var fromEmail = new mail.Email('resumemanager.linkedin@gmail.com');
+var path = require('path');
+app.get('/', function(req, res) {
+  res.sendFile(path.join(__dirname+'/index.html'));
+});
 app.get('/sendMailAccept', function(req, res) {
   var email_address = req.query.email;
   var content = new mail.Content('text/plain', "Congratulations! We would like to schedule an interview with you!")
@@ -32,4 +36,5 @@ app.get('/sendMailReject', function(req, res) {
     res.send('success')
   });
 })
+app.use(express.static(__dirname + '/public'));
 app.listen(3000);

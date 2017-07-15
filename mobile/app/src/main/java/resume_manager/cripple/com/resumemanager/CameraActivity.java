@@ -141,6 +141,7 @@ public class CameraActivity extends AppCompatActivity {
                         String username = "Sujeeth Jinesh";
                         String email = "sujeethjinesh@gmail.com";
                         long unixTime = System.currentTimeMillis() / 1000L;
+
                         User newUser = new User(username, email, unixTime, downloadUrl.toString());
 
                         profilesRef.child("users").push().setValue(newUser);

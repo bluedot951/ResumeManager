@@ -30,6 +30,7 @@ dependencies {
     testCompile 'junit:junit:4.12'
     compile 'id.zelory:compressor:2.1.0'
     compile 'com.wajahatkarim3.LongImageCamera:LongImageCamera:1.0.2'
+    compile 'com.github.karanchuri:PermissionManager:0.1.0'
 }
 
 apply plugin: 'com.google.gms.google-services'

@@ -4,7 +4,9 @@ document.onload = fetchAllKeys();
 var allData = [];
 var pos;
 function checkKey(e) {
-
+	if (pos >= allData.length) {
+		return
+	}
 	e = e || window.event;
 
 	if (e.keyCode == '37') {
@@ -45,8 +47,9 @@ function fetchAllKeys() {
 
 
 function setNextImage() {
-	if (pos == allData.length - 1) {
-		document.getElementById("resume").src = "done.jpg"
+	if (pos >= allData.length - 1) {
+		document.getElementById("resume").src = "done.jpg";
+		++pos;
 	}
 	else {
 		document.getElementById("resume").src = allData[++pos]["value"]["imageName"];

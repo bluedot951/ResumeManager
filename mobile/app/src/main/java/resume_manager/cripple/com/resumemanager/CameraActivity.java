@@ -6,8 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 
-import com.cripple.resume_manager.R;
-import com.google.android.cameraview.CameraView;
+import com.flurgle.camerakit.CameraView;
 import com.karan.churi.PermissionManager.PermissionManager;
 
 import java.util.ArrayList;
@@ -15,15 +14,17 @@ import java.util.List;
 
 public class CameraActivity extends AppCompatActivity {
 
-    private CameraView mCameraView;
     private PermissionManager permission;
-    private static boolean rightsGiven;
+    private CameraView cameraView;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_camera);
-        mCameraView = (CameraView) findViewById(R.id.camera);
+
+        cameraView = (CameraView)  findViewById(R.id.camera);
+
 
         permission=new PermissionManager() {
             @Override
@@ -56,8 +57,7 @@ public class CameraActivity extends AppCompatActivity {
         ArrayList<String> granted = permission.getStatus().get(0).granted;
 
         if (granted.contains(Manifest.permission.CAMERA)) {
-            rightsGiven = true;
-            mCameraView.start();
+            cameraView.start();
         } else {
             Log.d("Permission-Camera", "Camera Permission Denied");
         }
@@ -65,15 +65,15 @@ public class CameraActivity extends AppCompatActivity {
 
     @Override
     protected void onResume() {
-        if (rightsGiven) {
-            mCameraView.start();
+        if (permission.getStatus().get(0).granted.contains(Manifest.permission.CAMERA)) {
+            cameraView.start();
         }
         super.onResume();
     }
 
     @Override
     protected void onPause() {
-        mCameraView.stop();
         super.onPause();
+        cameraView.stop();
     }
 }

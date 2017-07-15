@@ -14,7 +14,7 @@ function checkKey(e) {
 		getLeft(allData[pos]["key"], function(val) {
 			var newVal = val + 1;
 			if(newVal == 2) {
-				sendRejectEmail("sg937@cornell.edu");
+				sendRejectEmail("sjinesh3@gatech.edu");
 			}
 			else {
 				// console.log("newVal:" + newVal);

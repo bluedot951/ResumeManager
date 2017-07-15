@@ -64,23 +64,85 @@ function setNextImage() {
 }
 
 function sendAcceptEmail(toEmail) {
-	var url = "http://localhost:3000/sendMailAccept?email=" + toEmail
+	var url = "https://api.sendgrid.com/v3/mail/send";
+
+	data = {
+	  "personalizations": [
+	    {
+	      "to": [
+	        {
+	          "email": toEmail
+	        }
+	      ],
+	      "subject": "Hello, World!"
+	    }
+	  ],
+	  "from": {
+	    "email": "sg937@cornell.edu"
+	  },
+	  "content": [
+	    {
+	      "type": "text/plain",
+	      "value": "Congratulations! We would like to schedule an interview with you!"
+	    }
+	  ]
+	};
+
 	$.ajax({
 	  url:url,
-	  method:"GET",
+	  method:"POST",
+	  data:JSON.stringify(data),
+	  contentType:"application/json; charset=utf-8",
+		crossDomain: true,
+	  dataType:"json",
+	  beforeSend: function(xhr) {
+	  	// xhr.setRequestHeader("Content-Type", "application/json");
+	  	xhr.setRequestHeader("Authorization", "BEARER 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");
+	  },
 	  success: function(result){
-	    console.log("Sent")
+	    alert("done!");
 	  }
 	})
 }
 
 function sendRejectEmail(toEmail) {
-	var url = "http://localhost:3000/sendMailReject?email=" + toEmail
+	var url = "https://api.sendgrid.com/v3/mail/send";
+
+	data = {
+	  "personalizations": [
+	    {
+	      "to": [
+	        {
+	          "email": toEmail
+	        }
+	      ],
+	      "subject": "Hello, World!"
+	    }
+	  ],
+	  "from": {
+	    "email": "sg937@cornell.edu"
+	  },
+	  "content": [
+	    {
+	      "type": "text/plain",
+	      "value": "Sorry, we received many highly qualified applicants this year, and could not find a position for you."
+	    }
+	  ]
+	};
+
 	$.ajax({
 	  url:url,
-	  type:"GET",
+	  type:"POST",
+	  data:JSON.stringify(data),
+		crossDomain: true,
+	  contentType:"application/json; charset=utf-8",
+	  dataType:"json",
+	  beforeSend: function(xhr) {
+	  	// xhr.setRequestHeader("Content-Type", "application/json");
+	  	xhr.setRequestHeader("Authorization", "BEARER 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");
+	  },
 	  success: function(){
-	    console.log("Sent")
+	    alert("done!");
 	  }
 	})
 }

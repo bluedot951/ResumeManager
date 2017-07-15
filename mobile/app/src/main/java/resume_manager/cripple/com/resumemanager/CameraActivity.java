@@ -5,7 +5,6 @@ import android.app.Activity;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
-import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -13,7 +12,6 @@ import android.view.View;
 
 import com.flurgle.camerakit.CameraListener;
 import com.flurgle.camerakit.CameraView;
-import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -126,7 +124,6 @@ public class CameraActivity extends AppCompatActivity {
     }
 
     private void uploadToServer(Bitmap image) {
-//        Uri imageUri = Uri.fromFile(new File("rahul's_path"));
         // Store image as hash
         StorageReference resumesRef = mStorageRef.child(image.hashCode() + ".jpeg");
 

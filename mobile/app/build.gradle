@@ -5,7 +5,7 @@ android {
     buildToolsVersion "25.0.0"
     defaultConfig {
         applicationId "com.cripple.resume_manager"
-        minSdkVersion 24
+        minSdkVersion 25
         targetSdkVersion 25
         versionCode 1
         versionName "1.0"
@@ -24,13 +24,15 @@ dependencies {
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-    compile 'com.android.support:appcompat-v7:25.0.0'
+    compile 'com.android.support:appcompat-v7:25.3.1'
+    compile 'com.google.firebase:firebase-core:11.0.2'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
     compile 'com.google.firebase:firebase-storage:11.0.2'
-    testCompile 'junit:junit:4.12'
     compile 'id.zelory:compressor:2.1.0'
     compile 'com.wajahatkarim3.LongImageCamera:LongImageCamera:1.0.2'
     compile 'com.github.karanchuri:PermissionManager:0.1.0'
+    compile 'com.google.firebase:firebase-auth:11.0.2'
+    testCompile 'junit:junit:4.12'
 }
 
-apply plugin: 'com.google.gms.google-services'
+apply plugin: "com.google.gms.google-services"

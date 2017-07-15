@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "321650084410-iomp6upd444akrdf849rs93d4ab8rfdo.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.cripple.resume_manager",
+            "certificate_hash": "1ef8f37e9021f0b99773fb2199954edfe351f26c"
+          }
+        },
+        {
           "client_id": "321650084410-v2hdpd3r3kcui7qm9u121l1taoa1d77s.apps.googleusercontent.com",
           "client_type": 3
         }
@@ -29,8 +37,13 @@
           "status": 1
         },
         "appinvite_service": {
-          "status": 1,
-          "other_platform_oauth_client": []
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "321650084410-v2hdpd3r3kcui7qm9u121l1taoa1d77s.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         },
         "ads_service": {
           "status": 2

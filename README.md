@@ -3,7 +3,7 @@ A platform for hiring managers and recruiters at career fairs to share resumes o
 
 ## License
     
-    Copyright {2017} {ResumeManager}
+    Copyright 2017 ResumeManager Team
     
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
